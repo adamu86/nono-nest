@@ -2,7 +2,16 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: NovaMono;
+  src: url('/NovaMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 html {
+    font-family: NovaMono, monospace;
     @apply
-    bg-slate-800 text-slate-200
+    bg-slate-800 text-slate-200 text-xl
 }
