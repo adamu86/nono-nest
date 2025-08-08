@@ -161,57 +161,59 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 {#if grid.length > 0}
-    <div 
-        class="w-fit grid grid-rows-[auto_1fr] grid-cols-[auto_1fr]" 
-        on:mouseup={() => isDragged = false}
-        on:mouseleave={() => isDragged = false}
-        on:keypress={() =>  null}
-    >
-        <div></div>
-        <div class="flex items-end">
-            {#each hints_y as hint_y, index}
-                <div class="flex flex-col">
-                    {#each hint_y as hint}
-                        <div class="w-10 h-8 bg-black flex justify-center items-center">
-                            <span class="{rows.vertical.includes(index) ? '' : 'opacity-20'}">
-                                {hint}
-                            </span>
-                        </div>
-                    {/each}
-                </div>
-            {/each}
+    <div class="grid gap-4">
+        <div 
+            class="w-fit grid grid-rows-[auto_1fr] grid-cols-[auto_1fr]" 
+            on:mouseup={() => isDragged = false}
+            on:mouseleave={() => isDragged = false}
+            on:keypress={() =>  null}
+        >
+            <div></div>
+            <div class="flex items-end">
+                {#each hints_y as hint_y, index}
+                    <div class="flex flex-col">
+                        {#each hint_y as hint}
+                            <div class="w-10 h-8 bg-black flex justify-center items-center">
+                                <span class="{rows.vertical.includes(index) ? '' : 'opacity-20'}">
+                                    {hint}
+                                </span>
+                            </div>
+                        {/each}
+                    </div>
+                {/each}
+            </div>
+            <div class="flex flex-col">
+                {#each hints_x as hint_x, index}
+                    <div class="flex justify-end">
+                        {#each hint_x as hint}
+                            <div class="w-8 h-10 bg-black flex justify-center items-center">
+                                <span class="{rows.horizontal.includes(index) ? '' : 'opacity-20'}">
+                                    {hint}
+                                </span>
+                            </div>
+                        {/each}
+                    </div>
+                {/each}
+            </div>
+            <div class="divide-y-2 divide-black grid border-2 border-black bg-white relative">
+                {#each {length: hints_x.length}, x}
+                    <div class="flex divide-x-2 divide-black">
+                        {#each {length: hints_y.length}, y}
+                            <button
+                                on:contextmenu|preventDefault
+                                on:mousedown|preventDefault={(event) => drag(event, x, y)}    
+                                on:mouseover={() => {if (isDragged) fill(x, y)}}
+                                aria-label="grid button"
+                                class="{grid[x][y] === 1 ? '!bg-black/75' : (grid[x][y] === -1 ? 'x' : 'bg-white')} hover:bg-black/10 relative w-full h-full overflow-hidden"
+                            >
+                                <div class="{rows.horizontal.includes(x) ? '' : 'line-x'} {rows.vertical.includes(y) ? '' : 'line-y'} opacity-30"></div>
+                            </button>
+                        {/each}
+                    </div>
+                {/each}
+            </div>
         </div>
-        <div class="flex flex-col">
-            {#each hints_x as hint_x, index}
-                <div class="flex justify-end">
-                    {#each hint_x as hint}
-                        <div class="w-8 h-10 bg-black flex justify-center items-center">
-                            <span class="{rows.horizontal.includes(index) ? '' : 'opacity-20'}">
-                                {hint}
-                            </span>
-                        </div>
-                    {/each}
-                </div>
-            {/each}
-        </div>
-        <div class="divide-y-2 divide-black grid border-2 border-black bg-white relative">
-            {#each {length: hints_x.length}, x}
-                <div class="flex divide-x-2 divide-black">
-                    {#each {length: hints_y.length}, y}
-                        <button
-                            on:contextmenu|preventDefault
-                            on:mousedown|preventDefault={(event) => drag(event, x, y)}    
-                            on:mouseover={() => {if (isDragged) fill(x, y)}}
-                            aria-label="grid button"
-                            class="{grid[x][y] === 1 ? '!bg-black/75' : (grid[x][y] === -1 ? 'x' : 'bg-white')} hover:bg-black/10 relative w-full h-full overflow-hidden"
-                        >
-                            <div class="{rows.horizontal.includes(x) ? '' : 'line-x'} {rows.vertical.includes(y) ? '' : 'line-y'} opacity-30"></div>
-                        </button>
-                    {/each}
-                </div>
-            {/each}
-        </div>
-        <div class="fixed gap-2 left-4 bottom-4 bg-black grid grid-cols-[auto_1fr] p-2">
+        <div class="w-fit gap-2 left-4 bottom-4 bg-black grid grid-cols-[auto_1fr] p-2">
             <div class="text-right my-auto">
                 Rows
             </div> 
