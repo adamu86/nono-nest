@@ -213,39 +213,27 @@
                 {/each}
             </div>
         </div>
-        <div class="w-fit gap-2 left-4 bottom-4 bg-black grid grid-cols-[auto_1fr] p-2">
-            <div class="text-right my-auto">
-                Rows
-            </div> 
-            <div class="divide-x-2 divide-white/10 flex bg-white/5 p-1">
-                {#if rows.horizontal.length > 0}
-                    {#each rows.horizontal.sort() as el}
-                        <span class="px-2">
-                            {el + 1}
-                        </span>
-                    {/each}
-                {:else}
-                    <span class="opacity-20 italic">
-                        all good
-                    </span>
-                {/if}
-            </div>
-            <div class="text-right my-auto">
-                Columns
-            </div>
-            <div class="divide-x-2 divide-white/10 flex bg-white/5 p-1">
-                {#if rows.vertical.length > 0}
-                    {#each rows.vertical.sort() as el}
-                        <span class="px-2">
-                            {el + 1}
-                        </span>
-                    {/each}
-                {:else}
-                    <span class="opacity-20 italic">
-                        all good
-                    </span>
-                {/if}
-            </div>
+    </div>
+    <div class="fixed right-4 top-4 text-center gap-2 bg-black grid grid-cols-2 p-2">
+        <div class="my-auto px-1">
+            Rows
+        </div> 
+        <div class="my-auto px-1">
+            Cols
+        </div>
+        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1">
+            {#each {length: grid.length}, el}
+                <span class="px-2 py-1 {!rows.horizontal.includes(el) ? 'text-white/20' : ''}">
+                    {el + 1}
+                </span>
+            {/each}
+        </div>
+        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1">
+            {#each {length: grid[0].length}, el}
+                <span class="px-2 py-1 {!rows.vertical.includes(el) ? 'text-white/20' : ''}">
+                    {el + 1}
+                </span>
+            {/each}
         </div>
     </div>
 {/if}
