@@ -13,5 +13,5 @@
 html {
     font-family: NovaMono, monospace;
     @apply
-    bg-slate-800 text-slate-200 text-xl
+    bg-gray-800 text-slate-200 text-xl
 }
