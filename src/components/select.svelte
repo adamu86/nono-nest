@@ -17,11 +17,11 @@
 <!-- svelte-ignore a11y_role_has_required_aria_props -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<div class="grid grid-rows-[auto_1fr] bg-black text-white">
-    <ol class="cursor-pointer order-1">
+<div class="grid grid-rows-[auto_1fr] bg-black rounded-sm overflow-hidden">
+    <ol class="cursor-pointer order-1 rounded-xs">
         {#if clicked}
             {#each options as el}
-                <li class="bg-black p-2 hover:inset-ring-1" onclick={() => onClick(el)}>
+                <li class="p-2 hover:inset-ring-1 rounded-sm transition-all" onclick={() => onClick(el)}>
                     {el.name}
                 </li>
             {/each}

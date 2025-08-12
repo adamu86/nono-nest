@@ -13,5 +13,5 @@
 html {
     font-family: NovaMono, monospace;
     @apply
-    bg-gray-800 text-slate-200 text-xl
+    from-sky-900 to-indigo-900 bg-gradient-to-b text-sky-200 text-xl h-full
 }

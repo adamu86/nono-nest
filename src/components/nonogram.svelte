@@ -171,9 +171,9 @@
             <div></div>
             <div class="flex items-end">
                 {#each hints_y as hint_y, index}
-                    <div class="flex flex-col">
+                    <div class="flex flex-col bg-black rounded-sm m-px mb-1">
                         {#each hint_y as hint}
-                            <div class="w-10 h-8 bg-black flex justify-center items-center">
+                            <div class="w-10 h-8 flex justify-center items-center text-center">
                                 <span class="{rows.vertical.includes(index) ? '' : 'opacity-20'}">
                                     {hint}
                                 </span>
@@ -184,9 +184,9 @@
             </div>
             <div class="flex flex-col">
                 {#each hints_x as hint_x, index}
-                    <div class="flex justify-end">
+                    <div class="flex justify-end bg-black rounded-sm m-px mr-1">
                         {#each hint_x as hint}
-                            <div class="w-8 h-10 bg-black flex justify-center items-center">
+                            <div class="w-8 h-10 flex justify-center items-center">
                                 <span class="{rows.horizontal.includes(index) ? '' : 'opacity-20'}">
                                     {hint}
                                 </span>
@@ -195,18 +195,18 @@
                     </div>
                 {/each}
             </div>
-            <div class="divide-y-2 divide-black grid border-2 border-black bg-white relative">
+            <div class="grid bg-white relative">
                 {#each {length: hints_x.length}, x}
-                    <div class="flex divide-x-2 divide-black">
+                    <div class="flex">
                         {#each {length: hints_y.length}, y}
                             <button
                                 on:contextmenu|preventDefault
                                 on:mousedown|preventDefault={(event) => drag(event, x, y)}    
                                 on:mouseover={() => {if (isDragged) fill(x, y)}}
                                 aria-label="grid button"
-                                class="{grid[x][y] === 1 ? '!bg-black/75' : (grid[x][y] === -1 ? 'x' : 'bg-white')} hover:bg-black/10 relative w-full h-full overflow-hidden"
+                                class="{grid[x][y] === 1 ? '!bg-black' : (grid[x][y] === -1 ? 'x' : 'bg-white inset-ring-1')} transition-all duration-200 hover:scale-115 hover:rounded-xs hover:-rotate-5 hover:ring-2 hover:z-1 hover:bg-gray-100 relative w-full h-full"
                             >
-                                <div class="{rows.horizontal.includes(x) ? '' : 'line-x'} {rows.vertical.includes(y) ? '' : 'line-y'} opacity-30"></div>
+                                <div class="{rows.horizontal.includes(x) ? '' : 'line-x'} {rows.vertical.includes(y) ? '' : 'line-y'} opacity-50"></div>
                             </button>
                         {/each}
                     </div>
@@ -214,21 +214,21 @@
             </div>
         </div>
     </div>
-    <div class="fixed right-4 top-4 text-center gap-2 bg-black grid grid-cols-2 p-2">
+    <div class="fixed right-4 top-4 text-center gap-2 bg-black grid grid-cols-2 p-2 rounded-sm">
         <div class="my-auto px-1">
             Rows
         </div> 
         <div class="my-auto px-1">
             Cols
         </div>
-        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1">
+        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1 rounded-xs">
             {#each {length: grid.length}, el}
                 <span class="px-2 py-1 {!rows.horizontal.includes(el) ? 'text-white/20' : ''}">
                     {el + 1}
                 </span>
             {/each}
         </div>
-        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1">
+        <div class="divide-y-2 divide-white/10 w-full flex flex-col bg-white/10 p-1 rounded-xs">
             {#each {length: grid[0].length}, el}
                 <span class="px-2 py-1 {!rows.vertical.includes(el) ? 'text-white/20' : ''}">
                     {el + 1}
@@ -258,7 +258,7 @@
 
 .line-x::before,
 .line-y::after {
-  background-color: red;
+  background-color: oklch(41% .159 10.272);
   content: "";
   left: 50%;
   top: 50%;
